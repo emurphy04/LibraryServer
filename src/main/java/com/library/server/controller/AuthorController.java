@@ -3,7 +3,6 @@ package com.library.server.controller;
 import com.library.server.model.Author;
 import com.library.server.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
