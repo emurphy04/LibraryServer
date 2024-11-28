@@ -56,4 +56,6 @@ public class BookService {
     public void deleteBook(int id) {
         bookRepo.deleteById(id);
     }
+
+    public void onlyherefortests(){}
 }
