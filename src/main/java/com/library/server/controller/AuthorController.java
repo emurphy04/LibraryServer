@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -44,7 +45,10 @@ public class AuthorController {
     }
 
     @PutMapping("/api/v1/authors/{id}")
-    public void updateAuthor(@PathVariable int id){
-
+    public void updateAuthor(@RequestBody Map<String, Object> body, @PathVariable int id){
+        Author currAuthor = authorService.getAuthorById(id).get();
+        currAuthor.setFirstName((String) body.get("firstName"));
+        currAuthor.setLastName((String) body.get("lastName"));
+        authorService.addAuthor(currAuthor);
     }
 }
