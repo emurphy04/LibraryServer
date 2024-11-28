@@ -1,8 +1,10 @@
 package com.library.server.model;
 
 import jakarta.persistence.*;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Entity
 @Table(name = "books")
@@ -57,8 +59,8 @@ public class Book {
         return releaseDate;
     }
 
-    public void setReleaseDate(LocalDate releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = LocalDate.parse(releaseDate);
     }
 
     @Override
