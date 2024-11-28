@@ -53,5 +53,6 @@ jobs:
           SPRING_DATASOURCE_PASSWORD: "password"
         run: echo "Environment variables set."
 
-      - name: Build with Maven (skip tests)
-        run: mvn -B package -DskipTests
+      - name: Build and run tests with Maven
+        run: mvn -B clean verify
+
