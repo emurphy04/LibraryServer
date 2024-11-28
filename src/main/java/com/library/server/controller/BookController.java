@@ -55,7 +55,11 @@ public class BookController {
     }
 
     @PutMapping("/api/v1/books/{id}")
-    public void updateBook(@PathVariable int id){
-
+    public void updateBook(@RequestBody Map<String, Object> body, @PathVariable int id){
+        Book currBook = bookService.getBookById(id).get();
+        currBook.setAuthor(authorService.getAuthorById((Integer) body.get("author")).get());
+        currBook.setName((String) body.get("name"));
+        currBook.setReleaseDate((String) body.get("release_date"));
+        bookService.addBook(currBook);
     }
 }
