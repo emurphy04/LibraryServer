@@ -8,12 +8,12 @@ import com.library.server.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class BookController {
     private final BookService bookService;
     private final AuthorService authorService;

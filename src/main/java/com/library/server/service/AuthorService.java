@@ -1,7 +1,9 @@
 package com.library.server.service;
 
 import com.library.server.model.Author;
+import com.library.server.model.Book;
 import com.library.server.repository.AuthorRepo;
+import com.library.server.repository.BookRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +15,12 @@ import java.util.Optional;
 public class AuthorService {
     private final AuthorRepo authorRepo;
 
+    private final BookRepo bookRepo;
+
     @Autowired
-    public AuthorService(AuthorRepo authorRepo) {
+    public AuthorService(AuthorRepo authorRepo, BookRepo bookRepo) {
         this.authorRepo = authorRepo;
+        this.bookRepo = bookRepo;
     }
 
 
@@ -38,11 +43,27 @@ public class AuthorService {
         return authorsWithLastName;
     }
 
+    public List<Book> getAuthorBooks(Author author){
+        List<Book> books = bookRepo.findAll();
+        List<Book> authorsBooks = new ArrayList<>();
+        for (Book book : books) {
+            if (book.getAuthor() == author) {
+                authorsBooks.add(book);
+            }
+        }
+        return authorsBooks;
+    }
+
     public void addAuthor(Author author) {
         authorRepo.save(author);
     }
 
     public void deleteAuthor(int id) {
+        Author author = authorRepo.findById(id).get();
+        List<Book> booksToDelete = getAuthorBooks(author);
+        for (Book book : booksToDelete) {
+            bookRepo.deleteById(book.getBookId());
+        }
         authorRepo.deleteById(id);
     }
 }

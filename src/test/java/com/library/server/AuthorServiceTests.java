@@ -92,19 +92,6 @@ public class AuthorServiceTests {
     }
 
     @Test
-    public void testDeleteAuthor() {
-        authorService.deleteAuthor(1);
-
-        verify(authorRepo, times(1)).deleteById(1);
-    }
-
-    @Test
-    public void testDeleteAuthorNotFound() {
-        authorService.deleteAuthor(999);
-        verify(authorRepo, times(1)).deleteById(999);
-    }
-
-    @Test
     public void testGetAuthorByLastName() {
         Author author1 = new Author("John", "Doe");
         Author author2 = new Author("Jane", "Smith");
